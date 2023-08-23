@@ -1,5 +1,7 @@
 # graphql_example
 
+![graphql_example_flutter](https://github.com/imdanielreis/graphql_flutter_example/assets/97130440/d7f07760-ba1c-42f0-9e69-47846502323e)
+
 This is an example project consuming a GraphQL API with Flutter
 
 The chosen API was:
