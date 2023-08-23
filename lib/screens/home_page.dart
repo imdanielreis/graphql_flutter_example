@@ -9,25 +9,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final String _query = """
-{
-  stations: metroStations(
-    filterBy: { lineId: 2 }
-    first: 100
-  ) {
-    edges {
-      node {
-        id
-        name
-        lines
-       	coordinates {
-          longitude
-          latitude
+    {
+      stations: metroStations(
+        filterBy: { lineId: 2 }
+        first: 100
+      ) {
+        edges {
+          node {
+            id
+            name
+            lines
+            coordinates {
+              longitude
+              latitude
+            }
+          }
         }
       }
     }
-  }
-}
-""";
+  """;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,12 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
               final item = result.data?['stations']['edges'][index];
 
-              final id = item['node']['id'] ?? " - ";
+              var identifier = item['node']['id'] ?? "";
+
+              if (identifier != "") {
+                identifier = "$identifier - ";
+              }
+
               final name = item['node']['name'] ?? "";
               final latitude = item['node']['coordinates']?['latitude'];
               final longitude = item['node']['coordinates']?['longitude'];
@@ -78,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                         ]),
                     padding: const EdgeInsets.all(20),
                     child: Column(children: [
-                      Text('$id - Nombre: $name'),
+                      Text('$identifier Nombre: $name'),
                       if (latitude != null && longitude != null)
                         Text('Latitud: $latitude | Longitud: $longitude')
                     ]),
